@@ -28,7 +28,7 @@ func main() {
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.Logger)
 
-	pHandler := ph.NewSubscriberHandler(connection)
+	pHandler := subs.NewSubscriberHandler(connection)
 	r.Route("/", func(rt chi.Router) {
 		rt.Mount("/subscriber", subscriberRouter(pHandler))
 	})
