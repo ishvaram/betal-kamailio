@@ -1,4 +1,4 @@
-package Subscriber
+package subscriber
 
 import (
 	"context"
