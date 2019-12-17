@@ -34,7 +34,7 @@ func (m *mysqlSubscriberRepo) fetch(ctx context.Context, query string, args ...i
 			&data.ID,
 			&data.Username,
 			&data.Domain,
-			&data.Password
+			&data.Password,
 		)
 		if err != nil {
 			return nil, err
