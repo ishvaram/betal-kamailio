@@ -6,6 +6,4 @@ type Subscriber struct {
 	Username string `json:"username"`
 	Domain   string `json:"domain"`
 	Password string `json:"password"`
-	Ha1      string `json:"ha1"`
-	Ha1b     string `json:"ha1b"`
 }
