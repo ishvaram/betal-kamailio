@@ -26,18 +26,18 @@ type Subscriber struct {
 }
 
 // Fetch all Subscriber data
-func (p *Subscriber) Fetch(w http.ResponseWriter, r *http.Request) {
-	payload, _ := p.repo.Fetch(r.Context(), 5)
+func (sub *Subscriber) Fetch(w http.ResponseWriter, r *http.Request) {
+	payload, _ := sub.repo.Fetch(r.Context(), 5)
 
 	respondwithJSON(w, http.StatusOK, payload)
 }
 
 // Create a new Subscriber
-func (p *Subscriber) Create(w http.ResponseWriter, r *http.Request) {
+func (sub *Subscriber) Create(w http.ResponseWriter, r *http.Request) {
 	subs := models.Subscriber{}
 	json.NewDecoder(r.Body).Decode(&subs)
 
-	newID, err := p.repo.Create(r.Context(), &subs)
+	newID, err := sub.repo.Create(r.Context(), &subs)
 	fmt.Println(newID)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "Server Error")
@@ -47,11 +47,11 @@ func (p *Subscriber) Create(w http.ResponseWriter, r *http.Request) {
 }
 
 // Update a Subscriber by id
-func (p *Subscriber) Update(w http.ResponseWriter, r *http.Request) {
+func (sub *Subscriber) Update(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
 	data := models.Subscriber{ID: int64(id)}
 	json.NewDecoder(r.Body).Decode(&data)
-	payload, err := p.repo.Update(r.Context(), &data)
+	payload, err := sub.repo.Update(r.Context(), &data)
 
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "Server Error")
@@ -61,21 +61,21 @@ func (p *Subscriber) Update(w http.ResponseWriter, r *http.Request) {
 }
 
 // GetByID returns a Subscriber details
-func (p *Subscriber) GetByID(w http.ResponseWriter, r *http.Request) {
+func (sub *Subscriber) GetByID(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
-	payload, err := p.repo.GetByID(r.Context(), int64(id))
+	payload, err := sub.repo.GetByID(r.Context(), int64(id))
 
 	if err != nil {
-		respondWithError(w, http.StatusNoContent, "Content not found")
+		respondWithError(w, http.StatusNoContent, "Subscriber not found")
 	}
 
 	respondwithJSON(w, http.StatusOK, payload)
 }
 
 // Delete a Subscriber
-func (p *Subscriber) Delete(w http.ResponseWriter, r *http.Request) {
+func (sub *Subscriber) Delete(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
-	_, err := p.repo.Delete(r.Context(), int64(id))
+	_, err := sub.repo.Delete(r.Context(), int64(id))
 
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "Server Error")

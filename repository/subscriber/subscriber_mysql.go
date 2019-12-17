@@ -86,8 +86,8 @@ func (m *mysqlSubscriberRepo) Create(ctx context.Context, p *models.Subscriber) 
 	return res.LastInsertId()
 }
 
-func (m *mysqlSubscriberRepo) Update(ctx context.Context, p *models.Subscriber) (*models.Subscriber, error) {
-	query := "UPDATE suscriber SET title=?, content=? WHERE id=?"
+func (m *mysqlSubscriberRepo) Update(ctx context.Context, sub *models.Subscriber) (*models.Subscriber, error) {
+	query := "UPDATE suscriber SET username=?, domain=?, password=? WHERE id=?"
 
 	stmt, err := m.Conn.PrepareContext(ctx, query)
 	if err != nil {
@@ -95,16 +95,16 @@ func (m *mysqlSubscriberRepo) Update(ctx context.Context, p *models.Subscriber) 
 	}
 	_, err = stmt.ExecContext(
 		ctx,
-		p.Title,
-		p.Content,
-		p.ID,
+		sub.Username,
+		sub.Password,
+		sub.Domain,
 	)
 	if err != nil {
 		return nil, err
 	}
 	defer stmt.Close()
 
-	return p, nil
+	return sub, nil
 }
 
 func (m *mysqlSubscriberRepo) Delete(ctx context.Context, id int64) (bool, error) {
