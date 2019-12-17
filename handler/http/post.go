@@ -7,10 +7,10 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi"
-	"github.com/ishvarm/betal-kamailio/driver"
-	models "github.com/ishvarm/betal-kamailio/models"
-	repository "github.com/ishvarm/betal-kamailio/repository"
-	subs "github.com/ishvarm/betal-kamailio/repository/subscriber"
+	"github.com/ishvaram/betal-kamailio/driver"
+	models "github.com/ishvaram/betal-kamailio/models"
+	repository "github.com/ishvaram/betal-kamailio/repository"
+	subs "github.com/ishvaram/betal-kamailio/repository/subscriber"
 )
 
 // NewSubscriberHandler ...
