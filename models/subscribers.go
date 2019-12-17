@@ -1,4 +1,4 @@
-package model
+package models
 
 // Subscriber type details
 type Subscriber struct {
