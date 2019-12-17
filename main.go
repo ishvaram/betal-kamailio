@@ -28,9 +28,9 @@ func main() {
 	r.Use(middleware.Recoverer)
 	r.Use(middleware.Logger)
 
-	pHandler := subs.NewSubscriberHandler(connection)
+	sHandler := subs.NewSubscriberHandler(connection)
 	r.Route("/", func(rt chi.Router) {
-		rt.Mount("/subscriber", subscriberRouter(pHandler))
+		rt.Mount("/subscriber", subscriberRouter(sHandler))
 	})
 
 	fmt.Println("Server listen at :8026")
