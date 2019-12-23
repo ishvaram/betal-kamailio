@@ -68,7 +68,7 @@ func (m *mysqlSubscriberRepo) GetByID(ctx context.Context, id int64) (*models.Su
 	return payload, nil
 }
 
-func (m *mysqlSubscriberRepo) Create(ctx context.Context, p *models.Subscriber) (int64, error) {
+func (m *mysqlSubscriberRepo) Create(ctx context.Context, sub *models.Subscriber) (int64, error) {
 	query := "INSERT subscriber SET username=?, domain=?, password=?"
 
 	stmt, err := m.Conn.PrepareContext(ctx, query)
@@ -76,7 +76,7 @@ func (m *mysqlSubscriberRepo) Create(ctx context.Context, p *models.Subscriber) 
 		return -1, err
 	}
 
-	res, err := stmt.ExecContext(ctx, p.Username, p.Domain, p.Password)
+	res, err := stmt.ExecContext(ctx, sub.Username, sub.Domain, sub.Password)
 	defer stmt.Close()
 
 	if err != nil {

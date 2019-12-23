@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -37,8 +36,7 @@ func (sub *Subscriber) Create(w http.ResponseWriter, r *http.Request) {
 	subs := models.Subscriber{}
 	json.NewDecoder(r.Body).Decode(&subs)
 
-	newID, err := sub.repo.Create(r.Context(), &subs)
-	fmt.Println(newID)
+	_, err := sub.repo.Create(r.Context(), &subs)
 	if err != nil {
 		respondWithError(w, http.StatusInternalServerError, "Server Error")
 	}
