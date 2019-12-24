@@ -31,7 +31,6 @@ func (m *mysqlSubscriberRepo) fetch(ctx context.Context, query string, args ...i
 		data := new(models.Subscriber)
 
 		err := rows.Scan(
-			&data.ID,
 			&data.Username,
 			&data.Domain,
 			&data.Password,
@@ -87,7 +86,7 @@ func (m *mysqlSubscriberRepo) Create(ctx context.Context, sub *models.Subscriber
 }
 
 func (m *mysqlSubscriberRepo) Update(ctx context.Context, sub *models.Subscriber) (*models.Subscriber, error) {
-	query := "UPDATE suscriber SET username=?, domain=?, password=? WHERE id=?"
+	query := "UPDATE subscriber SET username=?, domain=?, password=? WHERE id=?"
 
 	stmt, err := m.Conn.PrepareContext(ctx, query)
 	if err != nil {
