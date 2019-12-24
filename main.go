@@ -12,11 +12,11 @@ import (
 )
 
 func main() {
-	dbName := os.Getenv("kamailio")
-	dbPass := os.Getenv("exotel")
 	dbHost := os.Getenv("localhost")
-	dbPort := os.Getenv("3306")
 	dbUserName := os.Getenv("root")
+	dbPass := os.Getenv("exotel")
+	dbPort := os.Getenv("3306")
+	dbName := os.Getenv("kamailio")
 
 	connection, err := driver.ConnectSQL(dbHost, dbPort, dbUserName, dbPass, dbName)
 	if err != nil {
