@@ -68,7 +68,7 @@ func (m *mysqlSubscriberRepo) GetByID(ctx context.Context, id int64) (*models.Su
 }
 
 func (m *mysqlSubscriberRepo) Create(ctx context.Context, sub *models.Subscriber) (int64, error) {
-	query := "INSERT subscriber SET username=?, domain=?, password=?"
+	query := "INSERT `subscriber` SET username=?, domain=?, password=?"
 
 	stmt, err := m.Conn.PrepareContext(ctx, query)
 	if err != nil {
@@ -86,7 +86,7 @@ func (m *mysqlSubscriberRepo) Create(ctx context.Context, sub *models.Subscriber
 }
 
 func (m *mysqlSubscriberRepo) Update(ctx context.Context, sub *models.Subscriber) (*models.Subscriber, error) {
-	query := "UPDATE subscriber SET username=?, domain=?, password=? WHERE id=?"
+	query := "UPDATE `subscriber` SET username=?, domain=?, password=? WHERE id=?"
 
 	stmt, err := m.Conn.PrepareContext(ctx, query)
 	if err != nil {
@@ -107,7 +107,7 @@ func (m *mysqlSubscriberRepo) Update(ctx context.Context, sub *models.Subscriber
 }
 
 func (m *mysqlSubscriberRepo) Delete(ctx context.Context, id int64) (bool, error) {
-	query := "DELETE FROM subscriber WHERE id=?"
+	query := "DELETE FROM `subscriber` WHERE id=?"
 
 	stmt, err := m.Conn.PrepareContext(ctx, query)
 	if err != nil {
